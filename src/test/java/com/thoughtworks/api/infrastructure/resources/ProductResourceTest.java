@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -35,6 +36,7 @@ public class ProductResourceTest extends ApiSupport {
 
         Response created = target("/products").request().post(Entity.json(map));
         assertThat(created.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
+        assertThat(created.getLocation().toString(), endsWith("/products/1"));
 
     }
 }

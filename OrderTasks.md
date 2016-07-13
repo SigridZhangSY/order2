@@ -9,7 +9,7 @@
      - return 201 when create product with specified parameter — 10
   2. return 400 
      - return 400 when name, description or price is null — 10
-  3. save product in product repository (ProductRepository.create) — 10
+  3. save product in product repository (ProductRepository.createProduct) — 10
 - get()
 
   1. return 200 

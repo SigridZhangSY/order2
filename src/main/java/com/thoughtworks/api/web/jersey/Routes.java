@@ -16,4 +16,10 @@ public class Routes {
     public URI userUrl(User user) {
         return URI.create(String.format("%susers/%s", baseUri, user.getUserId().id()));
     }
+    public Routes() {
+        baseUri = "/";
+    }
+    public URI prodcut(String productId){
+        return URI.create(baseUri + "products/" + productId);
+    }
 }

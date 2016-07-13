@@ -52,6 +52,7 @@ public class Models extends AbstractModule {
     protected void configure() {
         bindPersistence();
         bind(UserRepository.class).to(MyBatisUserRepository.class);
+        bind(com.thoughtworks.api.infrastructure.core.ProductRepository.class).to(com.thoughtworks.api.infrastructure.repositories.ProductRepository.class);
     }
 
     private void bindPersistence() {
