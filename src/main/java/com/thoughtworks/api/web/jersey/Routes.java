@@ -1,6 +1,7 @@
 package com.thoughtworks.api.web.jersey;
 
 import com.thoughtworks.api.domain.user.User;
+import com.thoughtworks.api.infrastructure.core.Product;
 
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
@@ -19,7 +20,7 @@ public class Routes {
     public Routes() {
         baseUri = "/";
     }
-    public URI prodcut(String productId){
-        return URI.create(baseUri + "products/" + productId);
+    public URI prodcut(Product product){
+        return URI.create(baseUri + "products/" + product.getId());
     }
 }
