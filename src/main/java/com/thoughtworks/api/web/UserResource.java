@@ -34,4 +34,11 @@ public class UserResource {
 
         return Response.created(routes.user(userRepository.createUser(info))).build();
     }
+
+    @POST
+    @Path("/{userId}/orders")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createOrder(){
+        return Response.status(201).build();
+    }
 }

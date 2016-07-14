@@ -8,7 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.endsWith;
@@ -49,5 +51,16 @@ public class UserResourceTest extends ApiSupport {
         Map<String, Object> map = new HashMap();
         Response post = post("/users", map);
         assertThat(post.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
+    }
+
+    @Test
+    public void should_return_201_when_create_order(){
+        Map<String, Object> map = new HashMap();
+        map.put("name", "kayla");
+        map.put("address", "beijing");
+        map.put("phone", "13000007777");
+
+        Response post = post("/users/1/orders", map);
+        assertThat(post.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
     }
 }
