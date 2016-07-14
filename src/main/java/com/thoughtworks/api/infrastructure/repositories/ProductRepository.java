@@ -25,15 +25,8 @@ public class ProductRepository implements com.thoughtworks.api.infrastructure.co
 
     @Override
     public List<Product> find() {
-        Map map = new HashMap<String, Object>();
-        map.put("productId", nextIdentity());
-        map.put("name", "apple");
-        map.put("description", "red apple");
-        map.put("price", 1.1);
-        List<Product> productList = new ArrayList<>();
-        productList.add(new ProductRecord(map));
 
-        return productList;
+        return productMapper.findProducts();
     }
 
     private String nextIdentity() {

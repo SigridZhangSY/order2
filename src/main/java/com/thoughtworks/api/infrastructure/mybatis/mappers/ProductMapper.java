@@ -1,7 +1,8 @@
 package com.thoughtworks.api.infrastructure.mybatis.mappers;
 
-import com.thoughtworks.api.infrastructure.records.ProductRecord;
+import com.thoughtworks.api.infrastructure.core.Product;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,5 +10,8 @@ import java.util.Map;
  */
 public interface ProductMapper {
     int save(Map info);
-    ProductRecord findById(String id);
+
+    Product findById(String id);
+
+    List<Product> findProducts();
 }

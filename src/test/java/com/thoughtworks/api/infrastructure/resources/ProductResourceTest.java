@@ -1,5 +1,6 @@
 package com.thoughtworks.api.infrastructure.resources;
 
+import com.thoughtworks.api.infrastructure.core.ProductRepository;
 import com.thoughtworks.api.support.ApiSupport;
 import com.thoughtworks.api.support.ApiTestRunner;
 
@@ -7,6 +8,8 @@ import org.glassfish.grizzly.http.util.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import javax.inject.Inject;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
@@ -28,6 +31,8 @@ import static org.mockito.Mockito.verify;
 @RunWith(ApiTestRunner.class)
 public class ProductResourceTest extends ApiSupport {
 
+    @Inject
+    ProductRepository productRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -59,22 +64,25 @@ public class ProductResourceTest extends ApiSupport {
         assertThat(created.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
     }
 
-    @Test
-    public void should_return_200_when_list_products(){
-        WebTarget target = target("/products");
-        Response get = target.request().get();
-        assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
-    }
+
 
     @Test
     public void should_return_details_when_list_products(){
+        Map map = new HashMap<String, Object>();
+        map.put("name", "apple");
+        map.put("description", "red apple");
+        map.put("price", 1.2);
+        productRepository.createProduct(map);
+
         WebTarget target = target("/products");
         Response get = target.request().get();
         assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
         final List<Map> product = get.readEntity(List.class);
         assertThat(product.get(0).get("name"), is("apple"));
         assertThat(product.get(0).get("description"), is("red apple"));
-        assertEquals(1.1, Float.valueOf(String.valueOf(product.get(0).get("price"))), 0.01);
+        assertEquals(1.2, Float.valueOf(String.valueOf(product.get(0).get("price"))), 0.01);
     }
+
+
 
 }

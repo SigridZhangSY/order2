@@ -11,4 +11,9 @@
         FROM PRODUCTS P
         WHERE P.id = #{id}
     </select>
+    <select id="findProducts" resultMap="records.product">
+        SELECT
+        <include refid="columns.product"/>
+        FROM PRODUCTS P
+    </select>
 </mapper>

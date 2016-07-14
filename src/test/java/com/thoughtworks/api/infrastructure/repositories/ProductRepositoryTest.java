@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -36,5 +37,19 @@ public class ProductRepositoryTest {
         assertThat(product.getDescription(), is("red apple"));
         assertEquals(product.getPrice(), 1.1, 0.01);
 
+    }
+
+    @Test
+    public void should_get_all_products(){
+        Map map = new HashMap<String, Object>();
+        map.put("name", "apple");
+        map.put("description", "red apple");
+        map.put("price", 1.1);
+        productRepository.createProduct(map);
+
+        Product product = productRepository.find().get(0);
+        assertThat(product.getName(), is("apple"));
+        assertThat(product.getDescription(), is("red apple"));
+        assertEquals(product.getPrice(), 1.1, 0.01);
     }
 }
