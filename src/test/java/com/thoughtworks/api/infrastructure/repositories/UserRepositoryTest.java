@@ -8,10 +8,12 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by syzhang on 7/14/16.
@@ -29,6 +31,16 @@ public class UserRepositoryTest {
         User user = userRepository.createUser(map);
 
         assertThat(user.getName(), is("sdcc"));
+    }
+
+    @Test
+    public void should_find_user_by_name(){
+        Map<String, Object> map = new HashMap();
+        map.put("name", "sdcc");
+        userRepository.createUser(map);
+
+        Optional<User> user = userRepository.findByName(String.valueOf(map.get("name")));
+        assertTrue(user.isPresent());
     }
 
 }

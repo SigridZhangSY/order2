@@ -26,14 +26,7 @@ public class UserRepository implements com.thoughtworks.api.infrastructure.core.
 
     @Override
     public Optional<com.thoughtworks.api.infrastructure.core.User> findByName(String name) {
-        if(name.equals("xxx")){
-            Map<String, Object> info = new HashMap();
-            info.put("userId", nextIdentity());
-            info.put("name", "xxx");
-            return Optional.ofNullable(new com.thoughtworks.api.infrastructure.records.User(info));
-        }
-        else
-           return Optional.ofNullable(null);
+            return Optional.ofNullable(userMapper.findByName(name));
     }
 
     private String nextIdentity() {
