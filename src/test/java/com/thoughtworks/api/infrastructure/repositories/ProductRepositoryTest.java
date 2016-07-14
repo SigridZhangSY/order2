@@ -7,9 +7,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
+import javax.ws.rs.NotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
@@ -51,5 +53,19 @@ public class ProductRepositoryTest {
         assertThat(product.getName(), is("apple"));
         assertThat(product.getDescription(), is("red apple"));
         assertEquals(product.getPrice(), 1.1, 0.01);
+    }
+
+    @Test
+    public void should_get_a_product(){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", "apple");
+        map.put("description", "red apple");
+        map.put("price", 1.1);
+        Product product_save = productRepository.createProduct(map);
+
+        Product product_get = productRepository.findById(product_save.getId()).orElseThrow(() -> new NotFoundException("User not found"));;
+        assertThat(product_get.getName(), is("apple"));
+        assertThat(product_get.getDescription(), is("red apple"));
+        assertEquals(product_get.getPrice(), 1.1, 0.01);
     }
 }
