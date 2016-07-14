@@ -11,6 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by syzhang on 7/14/16.
@@ -24,7 +25,10 @@ public class UserResource {
     public Response createUser(@Context UserRepository userRepository,
                                @Context Routes routes,
                                Map<String, Object> info){
-        User user = userRepository.createUser(info);
-        return Response.created(routes.user(user)).build();
+        Optional<User> user = userRepository.findByName(String.valueOf(info.get("name")));
+        if (user.isPresent())
+            return Response.status(Response.Status.BAD_REQUEST).entity("User with same name already exists").build();
+
+        return Response.created(routes.user(userRepository.createUser(info))).build();
     }
 }
