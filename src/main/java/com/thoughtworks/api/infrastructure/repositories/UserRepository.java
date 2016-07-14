@@ -1,7 +1,8 @@
 package com.thoughtworks.api.infrastructure.repositories;
 
-import com.thoughtworks.api.infrastructure.core.User;
+import com.thoughtworks.api.infrastructure.records.User;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -9,9 +10,12 @@ import java.util.UUID;
  */
 public class UserRepository implements com.thoughtworks.api.infrastructure.core.UserRepository{
     @Override
-    public String createUser() {
-        return "1";
+    public  User createUser(Map<String, Object> info){
+        info.put("userId", nextIdentity());
+        return new User(info);
     }
 
-
+    private String nextIdentity() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
+    }
 }

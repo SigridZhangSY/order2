@@ -29,11 +29,10 @@ public class UserResourceTest extends ApiSupport {
     }
 
     @Test
-    public void should_return_uri_when_create_user(){
+    public void should_return_201_when_create_user_with_specified_parameter(){
         Map<String, Object> map = new HashMap();
         map.put("name", "sdcc");
         Response post = post("/users", map);
         assertThat(post.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
-        assertThat(post.getLocation().toString(), endsWith("/users/1"));
     }
 }
