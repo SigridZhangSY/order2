@@ -16,4 +16,10 @@
         <include refid="columns.product"/>
         FROM PRODUCTS P
     </select>
+    <select id="getPrice" resultType="float" >
+        SELECT
+        P.price
+        FROM PRODUCTS P
+        WHERE P.id = #{product_id}
+    </select>
 </mapper>

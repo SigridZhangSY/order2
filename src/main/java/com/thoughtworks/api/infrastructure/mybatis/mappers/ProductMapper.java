@@ -14,4 +14,6 @@ public interface ProductMapper {
     Product findById(String id);
 
     List<Product> findProducts();
+
+    Float getPrice(String productId);
 }

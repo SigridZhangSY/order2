@@ -5,4 +5,5 @@ package com.thoughtworks.api.infrastructure.core;
  */
 public interface OrderRepository {
     String createOrder(String orderId);
+    public float getPrice(String productId);
 }
