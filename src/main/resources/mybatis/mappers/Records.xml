@@ -16,4 +16,11 @@
         <result property="password" column="userPassword"/>
         <association property="userId" resultMap="userId"/>
     </resultMap>
+
+    <resultMap id="product" type="com.thoughtworks.api.infrastructure.records.ProductRecord">
+        <id column="productId" property="id"/>
+        <result column="productName" property="name"/>
+        <result column="productDescription" property="description"/>
+        <result column="productPrice" property="price"/>
+    </resultMap>
 </mapper>

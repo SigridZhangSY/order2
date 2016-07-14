@@ -10,4 +10,10 @@
         U.password as userPassword,
         U.role as userRole
     </sql>
+    <sql id="product">
+        P.id as productId,
+        P.name as productName,
+        P.description as productDescription,
+        P.price as productPrice
+    </sql>
 </mapper>

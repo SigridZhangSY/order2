@@ -14,16 +14,33 @@ public class ProductRecord implements Product {
     private String description;
     private float price;
 
+    public ProductRecord(){
+
+    }
     public ProductRecord(Map info){
-        this.id = String.valueOf(info.get("productId"));
-        this.name = String.valueOf(info.get("name"));
-        this.description = String.valueOf(info.get("description"));
-        this.price = Float.valueOf(String.valueOf(info.get("price")));
+        id = String.valueOf(info.get("productId"));
+        name = String.valueOf(info.get("name"));
+        description = String.valueOf(info.get("description"));
+        price = Float.valueOf(String.valueOf(info.get("price")));
     }
 
     @Override
     public String getId() {
-        return this.id;
+        return id;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getDescription(){
+        return description;
+    }
+
+    @Override
+    public float getPrice() {
+        return price;
+    }
 }
