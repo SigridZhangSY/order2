@@ -49,7 +49,7 @@ public class ProductRecord implements Product, Record {
     public Map<String, Object> toJson(Routes routes) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
-        map.put("uri", routes.prodcut(ProductRecord.this));
+        map.put("uri", routes.product(ProductRecord.this));
         map.put("name", name);
         map.put("description", description);
         map.put("price", price);

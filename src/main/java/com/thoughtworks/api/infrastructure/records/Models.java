@@ -50,6 +50,7 @@ public class Models extends AbstractModule {
     protected void configure() {
         bindPersistence();
         bind(com.thoughtworks.api.infrastructure.core.ProductRepository.class).to(com.thoughtworks.api.infrastructure.repositories.ProductRepository.class);
+        bind(com.thoughtworks.api.infrastructure.core.UserRepository.class).to(com.thoughtworks.api.infrastructure.repositories.UserRepository.class);
     }
 
     private void bindPersistence() {

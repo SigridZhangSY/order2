@@ -31,7 +31,7 @@ public class ProductResource {
                 info.getOrDefault("price", "").toString().trim().isEmpty())
             throw new InvalidParameterException("name, description and price are required");
         Product product = productRepository.createProduct(info);
-        return Response.created(routes.prodcut(product)).build();
+        return Response.created(routes.product(product)).build();
     }
 
     @GET
@@ -48,7 +48,7 @@ public class ProductResource {
                           @PathParam("productId") String productId){
         Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product not found"));
         Map<String, Object> map = new HashMap<>();
-        map.put("uri", routes.prodcut(product));
+        map.put("uri", routes.product(product));
         map.put("name", product.getName());
         map.put("description", product.getDescription());
         map.put("price", product.getPrice());
