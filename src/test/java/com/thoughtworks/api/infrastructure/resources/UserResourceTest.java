@@ -43,4 +43,11 @@ public class UserResourceTest extends ApiSupport {
         Response post = post("/users", map);
         assertThat(post.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
     }
+
+    @Test
+    public void should_return_400_when_name_is_null(){
+        Map<String, Object> map = new HashMap();
+        Response post = post("/users", map);
+        assertThat(post.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
+    }
 }
