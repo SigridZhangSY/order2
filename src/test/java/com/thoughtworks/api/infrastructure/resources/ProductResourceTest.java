@@ -83,6 +83,11 @@ public class ProductResourceTest extends ApiSupport {
         assertEquals(1.2, Float.valueOf(String.valueOf(product.get(0).get("price"))), 0.01);
     }
 
-
+    @Test
+    public void should_return_200_when_get_a_product(){
+        WebTarget target = target("/products/1");
+        Response get = target.request().get();
+        assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
+    }
 
 }

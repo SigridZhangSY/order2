@@ -38,4 +38,11 @@ public class ProductResource {
     public List<Product> listProducts( @Context ProductRepository productRepository){
         return productRepository.find();
     }
+
+    @Path("{productId}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getProduct(){
+        return "true";
+    }
 }
