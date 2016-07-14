@@ -2,6 +2,7 @@ package com.thoughtworks.api.infrastructure.core;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by syzhang on 7/13/16.
@@ -12,5 +13,5 @@ public interface ProductRepository {
 
     List<Product> find();
 
-    Product findById(String productId);
+    Optional<Product> findById(String productId);
 }

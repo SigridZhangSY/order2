@@ -30,14 +30,18 @@ public class ProductRepository implements com.thoughtworks.api.infrastructure.co
     }
 
     @Override
-    public Product findById(String productId) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("productId", "1");
-        map.put("name", "apple");
-        map.put("description", "red apple");
-        map.put("price", 1.2);
+    public Optional<Product> findById(String productId) {
+        if(productId.equals("1")) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("productId", "1");
+            map.put("name", "apple");
+            map.put("description", "red apple");
+            map.put("price", 1.2);
+            return Optional.ofNullable(new ProductRecord(map));
+        }
+        else
+            return Optional.ofNullable(null);
 
-        return new ProductRecord(map);
     }
 
     private String nextIdentity() {

@@ -53,24 +53,24 @@ public class ProductResourceTest extends ApiSupport {
 
     }
 
-    @Test
-    public void should_able_return_201_when_create111111(){
-//        Map map = new HashMap<String, Object>();
-
-        Map<String, Object> map = new HashMap<>();
-
-        map.put("name", "apple");
-        map.put("description", "red apple");
-        map.put("price", 1.2);
+//    @Test
+//    public void should_able_return_201_when_create111111(){
+////        Map map = new HashMap<String, Object>();
 //
-//        WebTarget target = target("/products");
-//        Response created = target.request().post(Entity.json(map));
-//        assertThat(created.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
-
-        Response post = post("products", map);
-        assertThat(post.getStatus(), is(201));
-
-    }
+//        Map<String, Object> map = new HashMap<>();
+//
+//        map.put("name", "apple");
+//        map.put("description", "red apple");
+//        map.put("price", 1.2);
+////
+////        WebTarget target = target("/products");
+////        Response created = target.request().post(Entity.json(map));
+////        assertThat(created.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
+//
+//        Response post = post("products", map);
+//        assertThat(post.getStatus(), is(201));
+//
+//    }
 
     @Test
     public void should_able_return_400_when_create(){
@@ -112,6 +112,12 @@ public class ProductResourceTest extends ApiSupport {
         assertThat(map.get("name"), is("apple"));
         assertThat(map.get("description"), is("red apple"));
         assertEquals(1.2, Float.valueOf(String.valueOf(map.get("price"))), 0.01);
+    }
+
+    @Test
+    public void should_return_404_when_the_product_not_exist(){
+        Response get = get("/products/2");
+        assertThat(get.getStatus(), is(HttpStatus.NOT_FOUND_404.getStatusCode()));
     }
 
 }

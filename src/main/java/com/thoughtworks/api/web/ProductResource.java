@@ -46,7 +46,7 @@ public class ProductResource {
     public Map getProduct(@Context ProductRepository productRepository,
                           @Context Routes routes,
                           @PathParam("productId") String productId){
-        Product product = productRepository.findById(productId);
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product not found"));
         Map<String, Object> map = new HashMap<>();
         map.put("uri", routes.prodcut(product));
         map.put("name", product.getName());
