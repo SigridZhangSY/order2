@@ -31,7 +31,7 @@ public class ProductRepository implements com.thoughtworks.api.infrastructure.co
 
     @Override
     public Product findById(String productId) {
-        Map map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("productId", "1");
         map.put("name", "apple");
         map.put("description", "red apple");

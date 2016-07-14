@@ -47,7 +47,7 @@ public class ProductResource {
                           @Context Routes routes,
                           @PathParam("productId") String productId){
         Product product = productRepository.findById(productId);
-        Map map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("uri", routes.prodcut(product));
         map.put("name", product.getName());
         map.put("description", product.getDescription());

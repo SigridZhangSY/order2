@@ -41,7 +41,7 @@ public class ProductResourceTest extends ApiSupport {
 
     @Test
     public void should_able_return_201_when_create(){
-        Map map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "apple");
         map.put("description", "red apple");
         map.put("price", 1.2);
@@ -54,8 +54,27 @@ public class ProductResourceTest extends ApiSupport {
     }
 
     @Test
+    public void should_able_return_201_when_create111111(){
+//        Map map = new HashMap<String, Object>();
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("name", "apple");
+        map.put("description", "red apple");
+        map.put("price", 1.2);
+//
+//        WebTarget target = target("/products");
+//        Response created = target.request().post(Entity.json(map));
+//        assertThat(created.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
+
+        Response post = post("products", map);
+        assertThat(post.getStatus(), is(201));
+
+    }
+
+    @Test
     public void should_able_return_400_when_create(){
-        Map map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("description", "red apple");
         map.put("price", 1.2);
 
@@ -68,7 +87,7 @@ public class ProductResourceTest extends ApiSupport {
 
     @Test
     public void should_return_details_when_list_products(){
-        Map map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "apple");
         map.put("description", "red apple");
         map.put("price", 1.2);
@@ -88,7 +107,7 @@ public class ProductResourceTest extends ApiSupport {
         WebTarget target = target("/products/1");
         Response get = target.request().get();
         assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
-        final Map map = get.readEntity(Map.class);
+        final Map<String, Object> map = get.readEntity(Map.class);
         assertThat(map.get("uri"), is("/products/1"));
         assertThat(map.get("name"), is("apple"));
         assertThat(map.get("description"), is("red apple"));

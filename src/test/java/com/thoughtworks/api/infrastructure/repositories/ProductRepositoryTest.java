@@ -27,7 +27,7 @@ public class ProductRepositoryTest {
     @Test
     public void should_create_and_get_product(){
 
-        Map map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "apple");
         map.put("description", "red apple");
         map.put("price", 1.1);
@@ -41,7 +41,7 @@ public class ProductRepositoryTest {
 
     @Test
     public void should_get_all_products(){
-        Map map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "apple");
         map.put("description", "red apple");
         map.put("price", 1.1);
