@@ -20,5 +20,6 @@ public class Routes {
         return URI.create(baseUri + "products/" + product.getId());
     }
     public URI user(User user){return URI.create(baseUri + "users/" + user.getId());}
+    public URI order(String userId, String orderId){return URI.create(baseUri + "users/" + userId + "/orders/" + orderId);}
 
 }

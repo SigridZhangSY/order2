@@ -54,7 +54,7 @@ public class UserResourceTest extends ApiSupport {
     }
 
     @Test
-    public void should_return_201_when_create_order(){
+    public void should_return_uri_when_create_order(){
         Map<String, Object> map = new HashMap();
         map.put("name", "kayla");
         map.put("address", "beijing");
@@ -62,5 +62,6 @@ public class UserResourceTest extends ApiSupport {
 
         Response post = post("/users/1/orders", map);
         assertThat(post.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
+        assertThat(post.getLocation().toString(), endsWith("/users/1/orders/1"));
     }
 }
