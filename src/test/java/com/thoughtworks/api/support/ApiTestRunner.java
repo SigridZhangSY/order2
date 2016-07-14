@@ -41,7 +41,7 @@ public class ApiTestRunner extends InjectBasedRunner {
                 // otherwise exception will occur and database will be broken,
                 // remember to clean database manually before running tests when exception happens
                 statement.executeUpdate("DELETE FROM PRODUCTS");
-                statement.executeUpdate("DELETE FROM users");
+                statement.executeUpdate("DELETE FROM USERS");
 
                 statement.close();
                 connection.commit();

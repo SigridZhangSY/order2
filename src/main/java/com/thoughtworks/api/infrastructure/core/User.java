@@ -5,4 +5,5 @@ package com.thoughtworks.api.infrastructure.core;
  */
 public interface User {
     public String getId();
+    public String getName();
 }

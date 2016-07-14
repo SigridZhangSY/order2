@@ -22,4 +22,9 @@ public class User implements com.thoughtworks.api.infrastructure.core.User {
     public String getId() {
         return id;
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }

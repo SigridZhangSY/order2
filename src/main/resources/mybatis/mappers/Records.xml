@@ -10,4 +10,8 @@
         <result column="productDescription" property="description"/>
         <result column="productPrice" property="price"/>
     </resultMap>
+    <resultMap id="user" type="com.thoughtworks.api.infrastructure.records.User">
+        <id column="userId" property="id"/>
+        <result column="userName" property="name"/>
+    </resultMap>
 </mapper>
