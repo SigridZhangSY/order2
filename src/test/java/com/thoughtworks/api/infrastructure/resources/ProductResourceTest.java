@@ -55,7 +55,12 @@ public class ProductResourceTest extends ApiSupport {
         WebTarget target = target("/products");
         Response created = target.request().post(Entity.json(map));
         assertThat(created.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
+    }
 
-
+    @Test
+    public void should_return_200_when_list_products(){
+        WebTarget target = target("/products");
+        Response get = target.request().get();
+        assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
     }
 }
