@@ -84,10 +84,15 @@ public class ProductResourceTest extends ApiSupport {
     }
 
     @Test
-    public void should_return_200_when_get_a_product(){
+    public void should_return_details_when_get_a_product(){
         WebTarget target = target("/products/1");
         Response get = target.request().get();
         assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
+        final Map map = get.readEntity(Map.class);
+        assertThat(map.get("uri"), is("/products/1"));
+        assertThat(map.get("name"), is("apple"));
+        assertThat(map.get("description"), is("red apple"));
+        assertEquals(1.2, Float.valueOf(String.valueOf(map.get("price"))), 0.01);
     }
 
 }

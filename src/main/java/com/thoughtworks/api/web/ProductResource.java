@@ -10,6 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,16 @@ public class ProductResource {
     @Path("{productId}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getProduct(){
-        return "true";
+    public Map getProduct(@Context ProductRepository productRepository,
+                          @Context Routes routes,
+                          @PathParam("productId") String productId){
+        Product product = productRepository.findById(productId);
+        Map map = new HashMap<>();
+        map.put("uri", routes.prodcut(product));
+        map.put("name", product.getName());
+        map.put("description", product.getDescription());
+        map.put("price", product.getPrice());
+
+        return map;
     }
 }
