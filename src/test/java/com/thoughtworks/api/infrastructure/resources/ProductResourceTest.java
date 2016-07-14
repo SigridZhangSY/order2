@@ -37,11 +37,24 @@ public class ProductResourceTest extends ApiSupport {
         Map map = new HashMap<String, Object>();
         map.put("name", "apple");
         map.put("description", "red apple");
-        map.put("price", 1.1);
+        map.put("price", 1.2);
 
         WebTarget target = target("/products");
         Response created = target.request().post(Entity.json(map));
         assertThat(created.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
+
+
+    }
+
+    @Test
+    public void should_able_return_400_when_create(){
+        Map map = new HashMap<String, Object>();
+        map.put("description", "red apple");
+        map.put("price", 1.2);
+
+        WebTarget target = target("/products");
+        Response created = target.request().post(Entity.json(map));
+        assertThat(created.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
 
 
     }

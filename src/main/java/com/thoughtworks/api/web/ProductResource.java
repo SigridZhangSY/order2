@@ -2,6 +2,7 @@ package com.thoughtworks.api.web;
 
 import com.thoughtworks.api.infrastructure.core.Product;
 import com.thoughtworks.api.infrastructure.core.ProductRepository;
+import com.thoughtworks.api.web.exception.InvalidParameterException;
 import com.thoughtworks.api.web.jersey.Routes;
 
 import javax.ws.rs.Consumes;
@@ -25,7 +26,11 @@ public class ProductResource {
                                   @Context ProductRepository productRepository,
                                   @Context Routes routes){
 
-        Product product = productRepository.creatProduct(info);
+        if(info.getOrDefault("name", "").toString().trim().isEmpty() ||
+                info.getOrDefault("description", "").toString().trim().isEmpty() ||
+                info.getOrDefault("price", "").toString().trim().isEmpty())
+            throw new InvalidParameterException("name, description and price are required");
+        Product product = productRepository.createProduct(info);
         return Response.created(routes.prodcut(product)).build();
     }
 }
