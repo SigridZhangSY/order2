@@ -11,10 +11,12 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -63,4 +65,16 @@ public class ProductResourceTest extends ApiSupport {
         Response get = target.request().get();
         assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
     }
+
+    @Test
+    public void should_return_details_when_list_products(){
+        WebTarget target = target("/products");
+        Response get = target.request().get();
+        assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
+        final List<Map> product = get.readEntity(List.class);
+        assertThat(product.get(0).get("name"), is("apple"));
+        assertThat(product.get(0).get("description"), is("red apple"));
+        assertEquals(1.1, Float.valueOf(String.valueOf(product.get(0).get("price"))), 0.01);
+    }
+
 }
