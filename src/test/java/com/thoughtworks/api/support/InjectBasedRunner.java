@@ -96,7 +96,6 @@ public abstract class InjectBasedRunner extends BlockJUnit4ClassRunner {
                         bind(ApiSupport.SetUp.class).toInstance(() -> {
 
                         });
-                        bind(EncryptionService.class).to(DefaultEncryptionService.class);
                     }
                 }}));
         modules.addAll(getModules());

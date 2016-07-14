@@ -4,7 +4,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.thoughtworks.api.domain.user.EncryptionService;
-import com.thoughtworks.api.domain.user.UserRepository;
 import com.thoughtworks.api.infrastructure.records.Models;
 import com.thoughtworks.api.infrastructure.util.DefaultEncryptionService;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -58,8 +57,6 @@ public class Api extends ResourceConfig {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(com.thoughtworks.api.infrastructure.repositories.MyBatisUserRepository.class).to(UserRepository.class);
-                bind(DefaultEncryptionService.class).to(EncryptionService.class);
             }
         });
     }

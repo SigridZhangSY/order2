@@ -63,7 +63,7 @@ public class ProductRepositoryTest {
         map.put("price", 1.1);
         Product product_save = productRepository.createProduct(map);
 
-        Product product_get = productRepository.findById(product_save.getId()).orElseThrow(() -> new NotFoundException("User not found"));;
+        Product product_get = productRepository.findById(product_save.getId()).orElseThrow(() -> new NotFoundException("Product not found"));;
         assertThat(product_get.getName(), is("apple"));
         assertThat(product_get.getDescription(), is("red apple"));
         assertEquals(product_get.getPrice(), 1.1, 0.01);
