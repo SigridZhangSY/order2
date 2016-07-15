@@ -5,4 +5,5 @@ package com.thoughtworks.api.infrastructure.core;
  */
 public interface Payment {
     String getOrderId();
+    void setUserId(String userId);
 }

@@ -219,15 +219,18 @@ public class UserResourceTest extends ApiSupport {
     }
 
     @Test
-    public void should_return_200_when_get_payment(){
+    public void should_return_details_when_get_payment(){
         User user = userRepository.createUser(TestHelper.user("sdcc"));
         String userId = user.getId();
         Product product = productRepository.createProduct(TestHelper.product("apple"));
         String productId = product.getId();
         Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
         String orderId = order.getId();
+        orderRepository.createPayment(TestHelper.payment(), orderId);
         Response get = get("/users/" + userId + "/orders/" + orderId + "/payment");
 
         assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
+        final Map<String, Object> res = get.readEntity(Map.class);
+        assertThat(res.get("uri"), is("/users/" + userId + "/orders/" + orderId + "/payment"));
     }
 }
