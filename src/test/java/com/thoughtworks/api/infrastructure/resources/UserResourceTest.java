@@ -1,12 +1,15 @@
 package com.thoughtworks.api.infrastructure.resources;
 
+import com.thoughtworks.api.infrastructure.core.*;
 import com.thoughtworks.api.support.ApiSupport;
 import com.thoughtworks.api.support.ApiTestRunner;
+import com.thoughtworks.api.support.TestHelper;
 import org.glassfish.grizzly.http.util.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +28,12 @@ import static org.hamcrest.CoreMatchers.is;
 @RunWith(ApiTestRunner.class)
 public class UserResourceTest extends ApiSupport {
 
+    @Inject
+    UserRepository userRepository;
+    @Inject
+    ProductRepository productRepository;
+    @Inject
+    OrderRepository orderRepository;
     @Before
     public void setUp() throws Exception {
         super.setUp();
@@ -54,14 +63,24 @@ public class UserResourceTest extends ApiSupport {
     }
 
     @Test
-    public void should_return_uri_when_create_order(){
-        Map<String, Object> map = new HashMap();
-        map.put("name", "kayla");
-        map.put("address", "beijing");
-        map.put("phone", "13000007777");
+    public void should_201_when_create_order_with_specified_parameter(){
+        User user = userRepository.createUser(TestHelper.user("sdcc"));
+        String userId = user.getId();
+        Product product = productRepository.createProduct(TestHelper.product("apple"));
+        String productId = product.getId();
+        Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
 
-        Response post = post("/users/1/orders", map);
+
+        Response post = post("/users/" + userId + "/orders", TestHelper.order("kayla", productId));
         assertThat(post.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
-        assertThat(post.getLocation().toString(), endsWith("/users/1/orders/1"));
+    }
+
+    @Test
+    public void should_return_400_when_create_order_for_no_exists_user(){
+        Product product = productRepository.createProduct(TestHelper.product("apple"));
+        String productId = product.getId();
+        Response post = post("/users/111/orders", TestHelper.order("kayla", productId));
+        assertThat(post.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
+
     }
 }

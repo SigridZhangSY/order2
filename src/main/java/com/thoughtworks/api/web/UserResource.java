@@ -1,5 +1,6 @@
 package com.thoughtworks.api.web;
 
+import com.thoughtworks.api.infrastructure.core.Order;
 import com.thoughtworks.api.infrastructure.core.OrderRepository;
 import com.thoughtworks.api.infrastructure.core.User;
 import com.thoughtworks.api.infrastructure.core.UserRepository;
@@ -37,14 +38,19 @@ public class UserResource {
         return Response.created(routes.user(userRepository.createUser(info))).build();
     }
 
-//    @POST
-//    @Path("/{userId}/orders")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response createOrder(@PathParam("userId") String userId,
-//                                @Context OrderRepository orderRepository,
-//                                @Context Routes routes){
-//        String orderId = orderRepository.createOrder("1");
-//        return Response.created(routes.order(userId, orderId)).build();
-//
-//    }
+    @POST
+    @Path("/{userId}/orders")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createOrder(Map<String, Object> info,
+                                @PathParam("userId") String userId,
+                                @Context UserRepository userRepository,
+                                @Context OrderRepository orderRepository,
+                                @Context Routes routes){
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isPresent() == false)
+            return Response.status(Response.Status.BAD_REQUEST).entity("User dose not exists").build();
+        Order order = orderRepository.createOrder(info, userId);
+        return Response.created(routes.order(userId, order.getId())).build();
+
+    }
 }
