@@ -51,7 +51,9 @@ public class UserResourceTest extends ApiSupport {
     public void should_return_400_when_user_exists(){
         Map<String, Object> map = new HashMap();
         map.put("name", "xxx");
+
         Response post = post("/users", map);
+        post = post("/users", map);
         assertThat(post.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
     }
 
