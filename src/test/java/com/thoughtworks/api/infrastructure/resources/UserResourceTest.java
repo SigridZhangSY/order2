@@ -233,4 +233,17 @@ public class UserResourceTest extends ApiSupport {
         final Map<String, Object> res = get.readEntity(Map.class);
         assertThat(res.get("uri"), is("/users/" + userId + "/orders/" + orderId + "/payment"));
     }
+
+    @Test
+    public void should_return_404_when_no_payment_exist(){
+        User user = userRepository.createUser(TestHelper.user("sdcc"));
+        String userId = user.getId();
+        Product product = productRepository.createProduct(TestHelper.product("apple"));
+        String productId = product.getId();
+        Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
+        String orderId = order.getId();
+        Response get = get("/users/" + userId + "/orders/" + orderId + "/payment");
+
+        assertThat(get.getStatus(), is(HttpStatus.NOT_FOUND_404.getStatusCode()));
+    }
 }
