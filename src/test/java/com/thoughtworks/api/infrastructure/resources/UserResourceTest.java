@@ -147,4 +147,18 @@ public class UserResourceTest extends ApiSupport {
         Response get = get("/users/111/orders");
         assertThat(get.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
     }
+
+    @Test
+    public void should_return_200_when_find_order(){
+        User user = userRepository.createUser(TestHelper.user("sdcc"));
+        String userId = user.getId();
+        Product product = productRepository.createProduct(TestHelper.product("apple"));
+        String productId = product.getId();
+        Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
+        String orderId = order.getId();
+
+        Response get = get("/users/" + userId + "/orders/" + orderId);
+        assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
+
+    }
 }

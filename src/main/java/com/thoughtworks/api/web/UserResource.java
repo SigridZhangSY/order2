@@ -77,4 +77,10 @@ public class UserResource {
             throw new InvalidParameterException("user not exists");
         return orderRepository.getOrdersForUser(userId);
     }
+
+    @GET
+    @Path("/{userId}/orders/{orderId}")
+    public String findOrder(){
+        return "OK";
+    }
 }
