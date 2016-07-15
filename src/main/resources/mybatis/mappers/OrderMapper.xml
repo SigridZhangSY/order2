@@ -1,0 +1,20 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thoughtworks.api.infrastructure.mybatis.mappers.OrderMapper">
+    <insert id="saveOrder">
+      INSERT INTO ORDERS (id, user_id, name, address, phone, total_price)
+        VALUES(#{id}, #{user_id}, #{name}, #{address}, #{phone}, #{total_price})
+    </insert>
+    <insert id="saveOrderItem" parameterType="java.util.List">
+        INSERT INTO ORDERITEMS (id, order_id, product_id, quantity, amount)
+        VALUES
+        <foreach collection="list" item="item" open="(" separator=","  close=")">
+            #{item.id}, #{item.order_id}, #{item.product_id}, #{item.quantity}, #{item.amount}
+        </foreach>
+    </insert>
+    <select id="findById" resultMap="records.order">
+        SELECT
+        <include refid="columns.order"/>
+        FROM ORDERS O
+        WHERE O.id = #{orderId}
+    </select>
+</mapper>

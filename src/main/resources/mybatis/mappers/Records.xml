@@ -14,4 +14,13 @@
         <id column="userId" property="id"/>
         <result column="userName" property="name"/>
     </resultMap>
+    <resultMap id="order" type="com.thoughtworks.api.infrastructure.records.OrderRecord">
+        <id column="order_id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="name"/>
+        <result column="user_address" property="address"/>
+        <result column="user_phone" property="phone"/>
+        <result column="order_time" property="time"/>
+        <result column="total_price" property="totalPrice"/>
+    </resultMap>
 </mapper>

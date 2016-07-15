@@ -37,14 +37,14 @@ public class UserResource {
         return Response.created(routes.user(userRepository.createUser(info))).build();
     }
 
-    @POST
-    @Path("/{userId}/orders")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response createOrder(@PathParam("userId") String userId,
-                                @Context OrderRepository orderRepository,
-                                @Context Routes routes){
-        String orderId = orderRepository.createOrder("1");
-        return Response.created(routes.order(userId, orderId)).build();
-
-    }
+//    @POST
+//    @Path("/{userId}/orders")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response createOrder(@PathParam("userId") String userId,
+//                                @Context OrderRepository orderRepository,
+//                                @Context Routes routes){
+//        String orderId = orderRepository.createOrder("1");
+//        return Response.created(routes.order(userId, orderId)).build();
+//
+//    }
 }
