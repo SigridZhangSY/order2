@@ -61,6 +61,35 @@ public class OrderRecord implements Order, Record{
     }
 
     @Override
+    public String getAddress() {
+        return address;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    @Override
+    public String getPhone() {
+        return phone;
+    }
+
+    @Override
+    public String getTime() {
+        return time;
+    }
+
+    @Override
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    @Override
+    public List<OrderItemRecord> getItems() {
+        return items;
+    }
+
+    @Override
     public Map<String, Object> toRefJson(Routes routes) {
         return toJson(routes);
     }

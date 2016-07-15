@@ -23,4 +23,23 @@ public class OrderItemRecord implements OrderItem {
         this.quantity = Integer.valueOf(String.valueOf(map.get("quantity")));
         this.amount = Integer.valueOf(String.valueOf(map.get("amount")));
     }
+
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getProductId() {
+        return productId;
+    }
+
+    @Override
+    public int getQuantity() {
+        return quantity;
+    }
+
+    @Override
+    public float getAmount() {
+        return amount;
+    }
 }

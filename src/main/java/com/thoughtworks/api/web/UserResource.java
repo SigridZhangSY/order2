@@ -4,6 +4,7 @@ import com.thoughtworks.api.infrastructure.core.Order;
 import com.thoughtworks.api.infrastructure.core.OrderRepository;
 import com.thoughtworks.api.infrastructure.core.User;
 import com.thoughtworks.api.infrastructure.core.UserRepository;
+import com.thoughtworks.api.infrastructure.records.OrderRecord;
 import com.thoughtworks.api.web.exception.InvalidParameterException;
 import com.thoughtworks.api.web.jersey.Routes;
 
@@ -11,9 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by syzhang on 7/14/16.
@@ -80,7 +79,32 @@ public class UserResource {
 
     @GET
     @Path("/{userId}/orders/{orderId}")
-    public String findOrder(){
-        return "OK";
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Object> findOrder(@PathParam("userId") String userId,
+                                        @PathParam("orderId") String orderId,
+                                        @Context OrderRepository orderRepository,
+                                         @Context Routes routes){
+        OrderRecord order = orderRepository.getOrderDetails(orderId);
+
+        Map<String, Object> map = new HashMap();
+        map.put("uri", routes.order(userId, orderId));
+        map.put("name", order.getName());
+        map.put("address", order.getAddress());
+        map.put("phone", order.getPhone());
+        map.put("total_price", order.getTotalPrice());
+        map.put("created_at", order.getTime());
+
+        List<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
+        for(int i = 0; i < order.getItems().size(); i++){
+            Map<String, Object> item = new HashMap();
+            item.put("product_id", order.getItems().get(i).getProductId());
+            item.put("quantity", order.getItems().get(i).getQuantity());
+            item.put("amount", order.getItems().get(i).getAmount());
+            items.add(item);
+        }
+
+        map.put("order_items", items);
+
+        return map;
     }
 }

@@ -98,7 +98,7 @@ public class OrderRepositoryTest {
         String productId = product.getId();
         Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
 
-        Order order_res = orderRepository.getOrderDetails(user.getId());
+        Order order_res = orderRepository.getOrderDetails(order.getId());
         assertThat(order_res.getName(), is("kayla"));
 
     }
