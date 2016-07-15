@@ -99,7 +99,7 @@ public class OrderRepositoryTest {
         String productId = product.getId();
         Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
 
-        Order order_res = orderRepository.getOrderDetails(order.getId()).orElseThrow(() -> new NotFoundException("Order not found"));;
+        Order order_res = orderRepository.getOrderDetails(order.getId()).orElseThrow(() -> new NotFoundException("Order not found"));
         assertThat(order_res.getName(), is("kayla"));
 
     }
@@ -116,4 +116,16 @@ public class OrderRepositoryTest {
         assertThat(payment.getOrderId(), is(order.getId()));
     }
 
+    @Test
+    public void should_find_payment(){
+        User user = userRepository.createUser(TestHelper.user("sdcc"));
+        String userId = user.getId();
+        Product product = productRepository.createProduct(TestHelper.product("apple"));
+        String productId = product.getId();
+        Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
+        Payment payment = orderRepository.createPayment(TestHelper.payment(), order.getId());
+
+        Payment payment_res = orderRepository.findPaymentById(order.getId()).orElseThrow(() -> new NotFoundException("Payment not found"));
+        assertThat(payment_res.getOrderId(), is(order.getId()));
+    }
 }

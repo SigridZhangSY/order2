@@ -69,6 +69,11 @@ public class OrderRepository implements com.thoughtworks.api.infrastructure.core
         return orderMapper.findPaymentById(orderId);
     }
 
+    @Override
+    public Optional<Payment> findPaymentById(String orderId) {
+        return Optional.ofNullable(orderMapper.findPaymentById(orderId));
+    }
+
     private String nextIdentity() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }

@@ -15,4 +15,5 @@ public interface OrderRepository {
     List<Order> getOrdersForUser(String userId);
     Optional<OrderRecord> getOrderDetails(String orderId);
     Payment createPayment(Map<String, Object> info, String orderId);
+    Optional<Payment> findPaymentById(String orderId);
 }
