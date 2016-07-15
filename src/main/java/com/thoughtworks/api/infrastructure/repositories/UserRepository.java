@@ -29,6 +29,11 @@ public class UserRepository implements com.thoughtworks.api.infrastructure.core.
             return Optional.ofNullable(userMapper.findByName(name));
     }
 
+    @Override
+    public Optional<User> findById(String userId) {
+        return Optional.ofNullable(userMapper.findById(userId));
+    }
+
     private String nextIdentity() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }

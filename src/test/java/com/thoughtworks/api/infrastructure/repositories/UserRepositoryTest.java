@@ -43,4 +43,14 @@ public class UserRepositoryTest {
         assertTrue(user.isPresent());
     }
 
+    @Test
+    public void should_find_user_by_id(){
+        Map<String, Object> map = new HashMap();
+        map.put("name", "sdcc");
+        User user = userRepository.createUser(map);
+
+        Optional<User> user_res = userRepository.findById(user.getId());
+        assertTrue(user_res.isPresent());
+    }
+
 }
