@@ -113,6 +113,9 @@ public class UserResource {
                                   @PathParam("orderId") String orderId,
                                   @Context OrderRepository orderRepository,
                                   @Context Routes routes){
+        if(orderRepository.findPaymentById(orderId).isPresent())
+            return Response.status(Response.Status.BAD_REQUEST).entity("Payment for this order has been created").build();
+
         Payment payment = orderRepository.createPayment(info, orderId);
         return Response.created(routes.payment(userId, payment)).build();
     }
