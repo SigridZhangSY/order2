@@ -7,5 +7,6 @@ import java.util.Map;
  */
 public interface OrderRepository {
     Order createOrder(Map<String, Object> info, String userId);
-    public float getPrice(String productId);
+    float getPrice(String productId);
+    Order findById(String orderId);
 }
