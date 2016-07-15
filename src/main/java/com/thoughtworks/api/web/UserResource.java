@@ -113,6 +113,9 @@ public class UserResource {
                                   @PathParam("orderId") String orderId,
                                   @Context OrderRepository orderRepository,
                                   @Context Routes routes){
+        if(info.getOrDefault("pay_type", "").toString().trim().isEmpty() ||
+                info.getOrDefault("amount", "").toString().trim().isEmpty())
+            throw new InvalidParameterException("pay_type and amount are required");
         if(orderRepository.findPaymentById(orderId).isPresent())
             return Response.status(Response.Status.BAD_REQUEST).entity("Payment for this order has been created").build();
 
