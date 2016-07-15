@@ -17,4 +17,9 @@
         FROM ORDERS O
         WHERE O.id = #{orderId}
     </select>
+    <select id="findOrders" resultMap="records.order">
+        SELECT
+        <include refid="columns.order"/>
+        FROM ORDERS O
+    </select>
 </mapper>

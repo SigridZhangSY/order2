@@ -51,8 +51,8 @@ public class OrderRepository implements com.thoughtworks.api.infrastructure.core
     }
 
     @Override
-    public Order findById(String orderId) {
-        return orderMapper.findById(orderId);
+    public List<Order> getOrdersForUser(String userId) {
+        return orderMapper.findOrders(userId);
     }
 
     private String nextIdentity() {

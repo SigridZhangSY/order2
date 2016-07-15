@@ -78,15 +78,16 @@ public class OrderRepositoryTest {
     }
 
     @Test
-    public void should_find_order_by_id(){
+    public void should_find_order_for_user(){
         User user = userRepository.createUser(TestHelper.user("sdcc"));
         String userId = user.getId();
         Product product = productRepository.createProduct(TestHelper.product("apple"));
         String productId = product.getId();
         Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
 
-        Order order_res = orderRepository.findById(order.getId());
-        assertThat(order.getName(), is("kayla"));
+        List<Order> order_res = orderRepository.getOrdersForUser(userId);
+        assertEquals(order_res.size(), 1);
+        assertThat(order_res.get(0).getName(), is("kayla"));
     }
 
 
