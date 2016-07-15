@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -46,6 +47,20 @@ public class UserResource {
                                 @Context UserRepository userRepository,
                                 @Context OrderRepository orderRepository,
                                 @Context Routes routes){
+        if(info.getOrDefault("name", "").toString().trim().isEmpty() ||
+                info.getOrDefault("address", "").toString().trim().isEmpty() ||
+                info.getOrDefault("phone", "").toString().trim().isEmpty() ||
+                info.getOrDefault("order_items", "").toString().trim().isEmpty())
+            throw new InvalidParameterException("name, address, phone and order_items are required");
+        List<Map<String, Object>> items = (List<Map<String, Object>>)info.get("order_items");
+        if(items.size() == 0)
+            throw new InvalidParameterException("order_items can't be empty");
+        for(int i = 0; i < items.size(); i++) {
+            if (items.get(i).getOrDefault("product_id", "").toString().trim().isEmpty() ||
+                    items.get(i).getOrDefault("quantity", "").toString().trim().isEmpty())
+                throw new InvalidParameterException("product_id and quantity are required");
+        }
+
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent() == false)
             return Response.status(Response.Status.BAD_REQUEST).entity("User dose not exists").build();
