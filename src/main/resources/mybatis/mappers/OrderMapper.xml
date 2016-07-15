@@ -28,4 +28,15 @@
         FROM ORDERITEMS AS T LEFT JOIN ORDERS AS O
         ON T.order_id = O.id WHERE O.id = #{orderId}
     </select>
+    <insert id="savePayment">
+        INSERT INTO
+        PAYMENTS (order_id, pay_type, amount)
+        VALUES (#{orderId}, #{payType}, #{mount})
+    </insert>
+    <select id="findPaymentById" resultMap="records.payment">
+        SELECT
+        <include refid="columns.payment"/>
+        FROM PAYMENTS P
+        WHERE P.order_id = #{orderId}
+    </select>
 </mapper>

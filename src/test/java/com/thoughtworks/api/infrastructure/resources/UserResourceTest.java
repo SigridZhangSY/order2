@@ -184,7 +184,7 @@ public class UserResourceTest extends ApiSupport {
         Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
         String orderId = order.getId();
 
-        Response post = post("/users/" + userId + "/orders/" + orderId + "/payment", TestHelper.payment(orderId));
+        Response post = post("/users/" + userId + "/orders/" + orderId + "/payment", TestHelper.payment());
         assertThat(post.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
         assertThat(post.getLocation().toString(), endsWith("/users/" + userId + "/orders/" + orderId + "/payment"));
     }

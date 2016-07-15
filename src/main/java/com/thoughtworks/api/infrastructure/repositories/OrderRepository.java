@@ -1,6 +1,7 @@
 package com.thoughtworks.api.infrastructure.repositories;
 
 import com.thoughtworks.api.infrastructure.core.Order;
+import com.thoughtworks.api.infrastructure.core.Payment;
 import com.thoughtworks.api.infrastructure.mybatis.mappers.OrderMapper;
 import com.thoughtworks.api.infrastructure.mybatis.mappers.ProductMapper;
 import com.thoughtworks.api.infrastructure.records.OrderItemRecord;
@@ -59,6 +60,13 @@ public class OrderRepository implements com.thoughtworks.api.infrastructure.core
     @Override
     public Optional<OrderRecord> getOrderDetails(String orderId) {
         return Optional.ofNullable(orderMapper.getOrderDetailsById(orderId));
+    }
+
+    @Override
+    public Payment createPayment(Map<String, Object> info, String orderId) {
+        info.put("orderId", orderId);
+        orderMapper.savePayment(info);
+        return orderMapper.findPaymentById(orderId);
     }
 
     private String nextIdentity() {

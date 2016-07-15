@@ -1,0 +1,6 @@
+CREATE TABLE PAYMENTS(
+  order_id VARCHAR(255) PRIMARY KEY ,
+  pay_type VARCHAR(255),
+  amount FLOAT,
+  FOREIGN KEY (order_id) REFERENCES ORDERS(id)
+);

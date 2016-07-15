@@ -104,5 +104,16 @@ public class OrderRepositoryTest {
 
     }
 
+    @Test
+    public void should_save_and_get_payment(){
+        User user = userRepository.createUser(TestHelper.user("sdcc"));
+        String userId = user.getId();
+        Product product = productRepository.createProduct(TestHelper.product("apple"));
+        String productId = product.getId();
+        Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
+        Payment payment = orderRepository.createPayment(TestHelper.payment(), order.getId());
+
+        assertThat(payment.getOrderId(), is(order.getId()));
+    }
 
 }

@@ -14,5 +14,5 @@ public interface OrderRepository {
     float getPrice(String productId);
     List<Order> getOrdersForUser(String userId);
     Optional<OrderRecord> getOrderDetails(String orderId);
-
+    Payment createPayment(Map<String, Object> info, String orderId);
 }
