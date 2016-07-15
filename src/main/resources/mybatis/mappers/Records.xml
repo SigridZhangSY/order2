@@ -23,4 +23,19 @@
         <result column="order_time" property="time"/>
         <result column="total_price" property="totalPrice"/>
     </resultMap>
+    <resultMap id="orderdetail" type="com.thoughtworks.api.infrastructure.records.OrderRecord">
+        <id column="order_id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="name"/>
+        <result column="user_address" property="address"/>
+        <result column="user_phone" property="phone"/>
+        <result column="order_time" property="time"/>
+        <result column="total_price" property="totalPrice"/>
+            <collection property="items" ofType="com.thoughtworks.api.infrastructure.records.OrderItemRecord">
+                <id column="item_id" property="id"/>
+                <result column="product_id" property="productId"/>
+                <result column="quantity" property="quantity"/>
+                <result column="amount" property="amount"/>
+            </collection>
+    </resultMap>
 </mapper>

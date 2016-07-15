@@ -13,6 +13,10 @@ public class OrderItemRecord implements OrderItem {
     private int quantity;
     private float amount;
 
+    public OrderItemRecord(){
+
+    }
+
     public OrderItemRecord(Map<String, Object> map){
         this.id = String.valueOf(map.get("id"));
         this.productId = String.valueOf(map.get("product_id"));

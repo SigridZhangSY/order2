@@ -22,4 +22,10 @@
         <include refid="columns.order"/>
         FROM ORDERS O
     </select>
+    <select id="getOrderDetailsById" resultMap="records.orderdetail">
+        SELECT
+        <include refid="columns.orderdetail"/>
+        FROM ORDERITEMS AS T LEFT JOIN ORDERS AS O
+        ON T.order_id = O.id WHERE O.user_id = #{userId}
+    </select>
 </mapper>

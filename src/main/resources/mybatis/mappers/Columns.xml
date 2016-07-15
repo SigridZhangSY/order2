@@ -23,4 +23,17 @@
         O.order_time as order_time,
         O.total_price as total_price
     </sql>
+    <sql id="orderdetail">
+        O.id as order_id,
+        O.user_id as user_id,
+        O.name as user_name,
+        O.address as user_address,
+        O.phone as user_phone,
+        O.order_time as order_time,
+        O.total_price as total_price,
+        T.id as item_id,
+        T.product_id as product_id,
+        T.quantity as quantity,
+        T.amount as amount
+    </sql>
 </mapper>
