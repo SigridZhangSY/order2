@@ -50,17 +50,17 @@
 
      - return 201 when create order — 3 4
      - return uri when create order — 3 5
-     - get product price in user repository(UserRepository.getProductPrice) — 10
-     - save order in user repository (UserRepository.createOrder) — 10
-     - return 201 when create oder with specified parameter — 7
+     - get product price in user repository(UserRepository.getProductPrice) — 10 15
+     - save order in user repository (UserRepository.createOrder) — 10 37
+     - return 201 when create oder with specified parameter — 7 12
 
   2. return 400
 
-     - find user by id (UserRepository.isUserPresent) — 10
-     - return 400 when create order with no exist user — 5
-     - return 400 when name, address, phone, order_items, product_id or quantity is null — 10
-     - find product by product_id in user repository (UserRepository.isProductPresent) — 10
-     - return 400 when product_id is not found — 5
+     - find user by id (UserRepository.isUserPresent) — 10 5
+     - return 400 when create order with no exist user — 5 7
+     - return 400 when name, address, phone, order_items, product_id or quantity is null — 10 12
+     - find product by product_id in user repository (UserRepository.isProductPresent) — 10 0
+     - return 400 when product_id is not found — 5 3
 
      ​
 
@@ -68,11 +68,11 @@
 
   1. return 200
 
-     - return 200 when get orders — 3
-     - get orders in user repository in user repository(UserRepository.getOrders) — 10
-     - return detail when get orders — 5
+     - return 200 when get orders — 3 3
+     - get orders in user repository in user repository(UserRepository.getOrders) — 10 23
+     - return detail when get orders — 5 9
 
-  2. return 400 when get order with no exist user — 5
+  2. return 400 when get order with no exist user — 5 4
 
      ​
 
@@ -80,10 +80,10 @@
 
 - get()
   1. return 200
-     - return 200 when get order — 3
-     - find order by order_id in user repository (UserRepository.findOrderById) — 10
-     - return detail when get order — 10
-  2. return 404 when no order exists — 3
+     - return 200 when get order — 3 3
+     - find order by order_id in user repository (UserRepository.findOrderById) — 10 37
+     - return detail when get order — 10 30
+  2. return 404 when no order exists — 3 10
 
 /users/{id}/orders/{orderId}/payments
 
@@ -91,23 +91,23 @@
 
   1. return 201
 
-     - return 201 when create payment — 3
-     - return uri when create payment — 3
-     - save payment in user repository (UserRepository.creatPayment) — 10
-     - return 201 when create payment with specified parameter — 5
+     - return 201 when create payment — 3 5
+     - return uri when create payment — 3 5
+     - save payment in user repository (UserRepository.creatPayment) — 10 20
+     - return 201 when create payment with specified parameter — 5 5
 
   2. return 400
 
-     - find whether payment exist in user repository (UserRepository.isPaymentPresent)
-     - return 400 when payment exists — 3
-     - return 400 when pay_type or amount is null — 5
+     - find whether payment exist in user repository (UserRepository.isPaymentPresent)  — 5  17
+     - return 400 when payment exists — 3 12
+     - return 400 when pay_type or amount is null — 5 4
 
      ​
 
 - get()
 
   1. return 200
-     - return 200 when get payment — 3
-     - find payment in user repository (UserRepository.findPaymentById) — 10
-     - return details when get payment — 5
-  2. return 404 when no payment exists — 3
+     - return 200 when get payment — 3 3
+     - find payment in user repository (UserRepository.findPaymentById) — 10 0
+     - return details when get payment — 5 12
+  2. return 404 when no payment exists — 3 1
