@@ -70,7 +70,11 @@ public class UserResource {
     @Path("/{userId}/orders")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Order> getAllOrders(@PathParam("userId") String userId,
-                               @Context OrderRepository orderRepository){
+                                    @Context OrderRepository orderRepository,
+                                    @Context UserRepository userRepository){
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isPresent() == false)
+            throw new InvalidParameterException("user not exists");
         return orderRepository.getOrdersForUser(userId);
     }
 }

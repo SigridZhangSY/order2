@@ -141,4 +141,10 @@ public class UserResourceTest extends ApiSupport {
         assertThat(res.get(0).get("uri"), is("/users/" + userId + "/orders/" + order.getId()));
 
     }
+
+    @Test
+    public void should_return_400_when_get_orders_for_no_exist_user(){
+        Response get = get("/users/111/orders");
+        assertThat(get.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
+    }
 }
