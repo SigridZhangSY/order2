@@ -124,4 +124,12 @@ public class UserResourceTest extends ApiSupport {
         Response post = post("/users/" + userId + "/orders", orderMap);
         assertThat(post.getStatus(), is(HttpStatus.BAD_REQUEST_400.getStatusCode()));
     }
+
+    @Test
+    public void should_return_200_when_get_all_orders(){
+        User user = userRepository.createUser(TestHelper.user("sdcc"));
+        String userId = user.getId();
+        Response get = get("/users/" + userId + "/orders");
+        assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
+    }
 }

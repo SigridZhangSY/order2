@@ -7,10 +7,7 @@ import com.thoughtworks.api.infrastructure.core.UserRepository;
 import com.thoughtworks.api.web.exception.InvalidParameterException;
 import com.thoughtworks.api.web.jersey.Routes;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -67,5 +64,11 @@ public class UserResource {
         Order order = orderRepository.createOrder(info, userId);
         return Response.created(routes.order(userId, order.getId())).build();
 
+    }
+
+    @GET
+    @Path("/{userId}/orders")
+    public String getAllOrders(){
+        return "OK";
     }
 }
