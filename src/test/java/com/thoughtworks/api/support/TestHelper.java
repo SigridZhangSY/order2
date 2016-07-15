@@ -52,5 +52,13 @@ public class TestHelper {
         return orderMap;
     }
 
+    public static Map<String, Object> payment(String orderId){
+        Map payMap = new HashMap<String, Object>();
+        payMap.put("pay_type", "CASH");
+        payMap.put("amount", "100");
+
+        return payMap;
+    }
+
 
 }

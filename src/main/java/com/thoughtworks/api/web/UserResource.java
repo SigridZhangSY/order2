@@ -107,4 +107,10 @@ public class UserResource {
 
         return map;
     }
+
+    @POST
+    @Path("/{userId}/orders/{orderId}/payment")
+    public Response createPayment(){
+        return Response.status(201).build();
+    }
 }
