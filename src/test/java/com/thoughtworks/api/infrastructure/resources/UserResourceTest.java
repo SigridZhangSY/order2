@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.endsWith;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -126,10 +127,18 @@ public class UserResourceTest extends ApiSupport {
     }
 
     @Test
-    public void should_return_200_when_get_all_orders(){
+    public void should_return_details_when_get_all_orders(){
         User user = userRepository.createUser(TestHelper.user("sdcc"));
         String userId = user.getId();
+        Product product = productRepository.createProduct(TestHelper.product("apple"));
+        String productId = product.getId();
+        Order order = orderRepository.createOrder(TestHelper.order("kayla", productId), userId);
+
         Response get = get("/users/" + userId + "/orders");
         assertThat(get.getStatus(), is(HttpStatus.OK_200.getStatusCode()));
+        final List<Map<String, Object>> res = get.readEntity(List.class);
+        assertEquals(1, res.size());
+        assertThat(res.get(0).get("uri"), is("/users/" + userId + "/orders/" + order.getId()));
+
     }
 }

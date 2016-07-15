@@ -68,7 +68,9 @@ public class UserResource {
 
     @GET
     @Path("/{userId}/orders")
-    public String getAllOrders(){
-        return "OK";
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Order> getAllOrders(@PathParam("userId") String userId,
+                               @Context OrderRepository orderRepository){
+        return orderRepository.getOrdersForUser(userId);
     }
 }
