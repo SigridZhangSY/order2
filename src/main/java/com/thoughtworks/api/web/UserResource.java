@@ -110,7 +110,9 @@ public class UserResource {
 
     @POST
     @Path("/{userId}/orders/{orderId}/payment")
-    public Response createPayment(){
-        return Response.status(201).build();
+    public Response createPayment(@PathParam("userId") String userId,
+                                  @PathParam("orderId") String orderId,
+                                  @Context Routes routes){
+        return Response.created(routes.payment(userId, orderId)).build();
     }
 }

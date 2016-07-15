@@ -176,7 +176,7 @@ public class UserResourceTest extends ApiSupport {
     }
 
     @Test
-    public void should_return_210_when_create_payment(){
+    public void should_return_uri_when_create_payment(){
         User user = userRepository.createUser(TestHelper.user("sdcc"));
         String userId = user.getId();
         Product product = productRepository.createProduct(TestHelper.product("apple"));
@@ -186,5 +186,6 @@ public class UserResourceTest extends ApiSupport {
 
         Response post = post("/users/" + userId + "/orders/" + orderId + "/payment", TestHelper.payment(orderId));
         assertThat(post.getStatus(), is(HttpStatus.CREATED_201.getStatusCode()));
+        assertThat(post.getLocation().toString(), endsWith("/users/" + userId + "/orders/" + orderId + "/payment"));
     }
 }
