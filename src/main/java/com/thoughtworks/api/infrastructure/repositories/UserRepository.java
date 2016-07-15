@@ -1,5 +1,6 @@
 package com.thoughtworks.api.infrastructure.repositories;
 
+import com.thoughtworks.api.infrastructure.core.Payment;
 import com.thoughtworks.api.infrastructure.mybatis.mappers.UserMapper;
 import com.thoughtworks.api.infrastructure.core.User;
 
@@ -33,6 +34,7 @@ public class UserRepository implements com.thoughtworks.api.infrastructure.core.
     public Optional<User> findById(String userId) {
         return Optional.ofNullable(userMapper.findById(userId));
     }
+
 
     private String nextIdentity() {
         return UUID.randomUUID().toString().replaceAll("-", "");
