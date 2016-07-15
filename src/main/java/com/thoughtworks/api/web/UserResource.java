@@ -84,7 +84,7 @@ public class UserResource {
                                         @PathParam("orderId") String orderId,
                                         @Context OrderRepository orderRepository,
                                          @Context Routes routes){
-        OrderRecord order = orderRepository.getOrderDetails(orderId);
+        OrderRecord order = orderRepository.getOrderDetails(orderId).orElseThrow(() -> new NotFoundException("Order not found"));
 
         Map<String, Object> map = new HashMap();
         map.put("uri", routes.order(userId, orderId));

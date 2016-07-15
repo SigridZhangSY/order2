@@ -9,6 +9,7 @@ import com.thoughtworks.api.infrastructure.records.OrderRecord;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -56,8 +57,8 @@ public class OrderRepository implements com.thoughtworks.api.infrastructure.core
     }
 
     @Override
-    public OrderRecord getOrderDetails(String orderId) {
-        return orderMapper.getOrderDetailsById(orderId);
+    public Optional<OrderRecord> getOrderDetails(String orderId) {
+        return Optional.ofNullable(orderMapper.getOrderDetailsById(orderId));
     }
 
     private String nextIdentity() {

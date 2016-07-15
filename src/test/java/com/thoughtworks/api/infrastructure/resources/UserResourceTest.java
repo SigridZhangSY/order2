@@ -166,4 +166,12 @@ public class UserResourceTest extends ApiSupport {
         assertEquals(items.size(), 1);
         assertEquals(items.get(0).get("amount"), 1.1);
     }
+
+    @Test
+    public void should_return_404_when_no_order_exists(){
+        User user = userRepository.createUser(TestHelper.user("sdcc"));
+        String userId = user.getId();
+        Response get = get("/users/" + userId + "/orders/111");
+        assertThat(get.getStatus(), is(HttpStatus.NOT_FOUND_404.getStatusCode()));
+    }
 }
